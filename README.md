@@ -4,7 +4,7 @@
 
 ## 功能
 
-- 64 個媒體及智庫 RSS 來源（含 8 個日語頻道、7 個韓文頻道與 20 個智庫來源），涵蓋亞洲、中東、歐洲、北美洲、拉丁美洲、非洲及大洋洲。
+- 86 個媒體及智庫 RSS 來源（含 8 個日語頻道、7 個韓文頻道與 20 個智庫來源），涵蓋亞洲、中東、歐洲、北美洲、南美洲、非洲及大洋洲。
 - 新增日語來源：NHK（綜合／國際／經濟）、朝日新聞、每日新聞、共同通信社、時事通信、ITmedia NEWS。
 - 新增韓文來源：聯合新聞、韓民族日報、京鄉新聞、東亞日報、朝鮮日報、SBS 政治、ZDNet Korea。
 - 新增智庫：Global Taiwan Institute、Pacific Forum、ISEAS Fulcrum、MERICS、SWP、Atlantic Council、Stimson、ISDP、East-West Center、AEI、Hudson。RUSI 已更新為官方出版品 RSS。
@@ -14,6 +14,23 @@
 - 英／日／韓語言篩選、多語分類、搜尋、來源所在地區篩選、來源篩選、24 小時／7 天篩選、依時間排序、分批顯示、網址去重。
 - 收藏保存在目前瀏覽器的 localStorage，沒有帳號同步。
 - 頁面可見時每五分鐘更新，顯示來源成功／失敗狀態。
+
+## 各洲新聞媒體涵蓋
+
+只計不同新聞媒體品牌；BBC 與 NHK 的多個頻道各算一家，20 個智庫另列。分類依媒體主要所在地或編輯部，亞洲包含中東，不是文章發生地。
+
+| 大洲 | 不同新聞媒體 |
+| --- | ---: |
+| 亞洲 | 21 |
+| 歐洲 | 7 |
+| 非洲 | 8 |
+| 北美洲 | 6 |
+| 南美洲 | 8 |
+| 大洋洲 | 11 |
+
+南極洲不設定六家本地媒體目標；南極相關報導仍由全球來源涵蓋。網站顯示各洲的收錄媒體數、目前連線媒體數及智庫數；點擊大洲卡片可查看媒體清單。收錄數不代表每家目前都能連線。
+
+本次新增：The Namibian、Punch、MyJoyOnline、Premium Times、The New Times、Newsroom、PNG Post-Courier、The Rio Times、MercoPress、Cook Islands News、Peru Reports、Colombia Reports、Brazil Reports、Latin America Reports、Argentina Reports、Island Times、Kaniva Tonga、FBC News、Pacific Islands News Association、Matangi Tonga、Islands Business、Daily Trust。
 
 ## 本機執行
 
