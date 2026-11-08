@@ -1,0 +1,14 @@
+{
+  "name": "worldwire-global-desk",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Global English news and think-tank research dashboard",
+  "scripts": {
+    "start": "node scripts/preview.mjs",
+    "check": "node scripts/check.mjs",
+    "dev": "npx wrangler dev",
+    "deploy": "npx wrangler deploy"
+  },
+  "engines": { "node": ">=22" }
+}
