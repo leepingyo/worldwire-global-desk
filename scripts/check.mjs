@@ -10,9 +10,11 @@ new Function(script);
 assert.ok(html.includes("['智庫報告','▤','think']"));
 assert.ok(html.includes("['付費報導','▣','paid']"));
 const feeds = JSON.parse(script.match(/const feeds=(\[.*?\]);/s)[1]);
-assert.equal(feeds.length, 100);
+assert.equal(feeds.length, 113);
 assert.equal(feeds.filter(f => !f.watch).length, 86);
-assert.equal(feeds.filter(f => f.watch === 'taiwan').length, 6);
+assert.equal(feeds.filter(f => f.watch === 'taiwan').length, 19);
+assert.equal(feeds.filter(f => f.watch === 'taiwan' && f.search).length, 6);
+assert.ok(feeds.filter(f => f.search).every(f => f.fallback?.startsWith('https://www.bing.com/news/search?')));
 assert.equal(feeds.filter(f => f.watch === 'f16').length, 8);
 assert.equal(feeds.filter(f => f.lang === 'ja').length, 8);
 assert.equal(feeds.filter(f => f.lang === 'ko').length, 7);
@@ -57,4 +59,15 @@ for (const id of ['999', '-1', 'https://example.com', '']) {
   assert.equal((await worker.fetch(new Request(`https://worldwire.example/api/feed?id=${encodeURIComponent(id)}`))).status, 400);
 }
 assert.equal((await worker.fetch(new Request('https://worldwire.example/missing'))).status, 404);
+const originalFetch = globalThis.fetch;
+try {
+  const tracker = feeds.find(f => f.search && f.lang === 'fr');
+  globalThis.fetch = async url => String(url).includes('news.google.com')
+    ? new Response('Unavailable', {status:403})
+    : new Response('<?xml version="1.0" encoding="UTF-8"?><rss><channel><item><title>Taïwan report</title></item></channel></rss>');
+  const fallback = await worker.fetch(new Request(`https://worldwire.example/api/feed?id=${tracker.id}`));
+  assert.equal(fallback.status, 200);
+  assert.equal(fallback.headers.get('X-News-Index'), 'bing');
+  assert.ok((await fallback.text()).includes('Taïwan report'));
+} finally { globalThis.fetch = originalFetch; }
 console.log('Passed: HTML, embedded JavaScript, section buttons, feed allowlist, and 404 routing.');
