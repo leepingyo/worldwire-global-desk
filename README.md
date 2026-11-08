@@ -1,5 +1,9 @@
 # WORLDWIRE｜全球新聞工作台
 
+**公開網站：https://worldwire-global-desk.leepingyo.workers.dev/**
+
+已部署至 Cloudflare Workers 免費方案；原始碼修改後需重新部署才會更新線上網站。
+
 為每天大量閱讀外文新聞的國際新聞記者製作的繁體中文介面，保留英文原標題、RSS 摘錄與原文連結。
 
 ## 功能
