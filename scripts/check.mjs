@@ -10,10 +10,19 @@ new Function(script);
 assert.ok(html.includes("['智庫報告','▤','think']"));
 assert.ok(html.includes("['付費報導','▣','paid']"));
 const feeds = JSON.parse(script.match(/const feeds=(\[.*?\]);/s)[1]);
-assert.equal(feeds.length, 64);
+assert.equal(feeds.length, 86);
 assert.equal(feeds.filter(f => f.lang === 'ja').length, 8);
 assert.equal(feeds.filter(f => f.lang === 'ko').length, 7);
 assert.equal(feeds.filter(f => f.category === '智庫').length, 20);
+for (const region of ['亞洲', '歐洲', '非洲', '北美洲', '南美洲', '大洋洲']) {
+  const media = new Set(feeds.filter(f => f.region === region && f.category !== '智庫').map(f => f.publisher));
+  assert.ok(media.size >= 6, `${region}: ${media.size} different news outlets`);
+  console.log(`${region}: ${media.size} different news outlets`);
+}
+assert.equal(new Set(feeds.filter(f => f.name.startsWith('BBC ')).map(f => f.publisher)).size, 1);
+assert.equal(new Set(feeds.filter(f => f.name.startsWith('NHK ')).map(f => f.publisher)).size, 1);
+assert.ok(!feeds.some(f => ['拉丁美洲', '中東'].includes(f.region)));
+assert.ok(html.includes('id="coverage"'));
 assert.ok(html.includes('id="language"'));
 const categorySource = script.slice(script.indexOf('function category('), script.indexOf('function parse('));
 const classify = new Function(categorySource + '; return category;')();
