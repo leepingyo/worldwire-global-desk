@@ -2,5 +2,13 @@
   "$schema": "https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/config-schema.json",
   "name": "worldwire-global-desk",
   "main": "worker/index.js",
-  "compatibility_date": "2026-11-08"
+  "compatibility_date": "2026-11-08",
+  "d1_databases": [{
+    "binding": "SOURCE_HEALTH",
+    "database_name": "worldwire-source-health",
+    "database_id": "1adca6aa-c1b4-43d2-82bc-6665eb884283"
+  }],
+  "triggers": {
+    "crons": ["*/15 * * * *", "0 1 * * MON"]
+  }
 }
