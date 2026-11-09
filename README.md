@@ -55,6 +55,14 @@
 
 本次新增：The Namibian、Punch、MyJoyOnline、Premium Times、The New Times、Newsroom、PNG Post-Courier、The Rio Times、MercoPress、Cook Islands News、Peru Reports、Colombia Reports、Brazil Reports、Latin America Reports、Argentina Reports、Island Times、Kaniva Tonga、FBC News、Pacific Islands News Association、Matangi Tonga、Islands Business、Daily Trust。
 
+## 自動維護媒體來源
+
+Cloudflare 每 15 分鐘檢查一批 RSS，每個媒體頻道約每六小時檢查一次。連線錯誤、非 RSS 回應，或缺少可用標題與 HTTP(S) 文章網址會記為失敗。成功後歸零。連續三次失敗即停用，並在「來源與連線」保留停用原因。新聞搜尋索引與智庫另行管理，專題未命中關鍵字也不計為失敗。
+
+每週一上午 09:00（台北時間）檢查停用名單，從同洲候補中驗證並補入其他媒體。這版有 15 個候補，涵蓋六大洲。若同洲候補都已使用或無法取得文章，來源會維持等待狀態。候補名單由維護者更新，停用來源不會再被請求。
+
+正式環境使用 `SOURCE_HEALTH` D1 綁定。自行部署時可修改 `wrangler.jsonc` 內的資料庫設定，並先用 `source-health.sql` 建表。可執行 `node scripts/check-source-health.mjs` 驗證停用與替換流程。
+
 ## 本機執行
 
 需要 Node.js 22 或以上。基本預覽與檢查不需要安裝套件。
