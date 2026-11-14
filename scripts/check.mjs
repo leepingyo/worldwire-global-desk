@@ -10,8 +10,8 @@ new Function(script);
 assert.ok(html.includes("['智庫報告','▤','think']"));
 assert.ok(html.includes("['付費報導','▣','paid']"));
 const feeds = JSON.parse(script.match(/const feeds=(\[.*?\]);/s)[1]);
-assert.equal(feeds.length, 113);
-assert.equal(feeds.filter(f => !f.watch).length, 86);
+assert.equal(feeds.length, 137);
+assert.equal(feeds.filter(f => f.id < 86).length, 86);
 assert.ok(!feeds.some(f => /taipei\s*times/i.test(f.name)));
 assert.ok(feeds.some(f => f.name === 'PBS News Hour' && f.region === '北美洲' && f.lang === 'en'));
 assert.equal(feeds.filter(f => f.watch === 'taiwan').length, 19);
@@ -20,7 +20,7 @@ assert.ok(feeds.filter(f => f.search).every(f => f.fallback?.startsWith('https:/
 assert.equal(feeds.filter(f => f.watch === 'f16').length, 8);
 assert.equal(feeds.filter(f => f.lang === 'ja').length, 8);
 assert.equal(feeds.filter(f => f.lang === 'ko').length, 7);
-assert.equal(feeds.filter(f => f.category === '智庫').length, 20);
+assert.equal(feeds.filter(f => f.category === '智庫').length, 29);
 for (const region of ['亞洲', '歐洲', '非洲', '北美洲', '南美洲', '大洋洲']) {
   const media = new Set(feeds.filter(f => f.region === region && f.category !== '智庫' && !f.watch).map(f => f.publisher));
   assert.ok(media.size >= 6, `${region}: ${media.size} different news outlets`);
@@ -31,12 +31,17 @@ assert.equal(new Set(feeds.filter(f => f.name.startsWith('NHK ')).map(f => f.pub
 assert.ok(!feeds.some(f => ['拉丁美洲', '中東'].includes(f.region)));
 assert.ok(html.includes('id="coverage"'));
 assert.ok(html.includes('id="language"'));
+for (const section of ['東南亞','中國與港澳','日韓','政治與經濟']) assert.ok(html.includes(section));
+for (const country of ['新加坡','馬來西亞','越南','泰國','緬甸','寮國','印尼']) assert.ok(feeds.some(f=>f.country===country&&f.lang==='en'), country);
+assert.ok(feeds.some(f=>f.country==='澳門'&&f.watch==='china'));
+assert.ok(feeds.some(f=>f.format==='jiemian'&&f.lang==='zh'));
+assert.ok(feeds.some(f=>f.format==='brookings'));
 const categorySource = script.slice(script.indexOf('function isExcludedArticle('), script.indexOf('function parse('));
 const classify = new Function(categorySource + '; return category;')();
 for (const [title, expected] of [
-  ['半導体メーカーが新技術を発表', '科技'],
-  ['韓国の大統領選挙が始まる', '政治'],
-  ['정부, 새로운 경제 정책 발표', '經濟'],
+  ['半導体メーカーが新技術を発表', '醫療與健康'],
+  ['韓国の大統領選挙が始まる', '政治與經濟'],
+  ['정부, 새로운 경제 정책 발표', '政治與經濟'],
   ['백신 임상 시험 시작', '醫療與健康'],
   ['미사일 시험 발사', '軍事'],
   ['映画祭が開幕', '藝術與娛樂'],
