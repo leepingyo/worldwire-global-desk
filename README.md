@@ -125,3 +125,13 @@ Wrangler 會顯示部署網址。第一次 npx 或 npm 安裝需要網路；Clou
 ## 軍事新聞來源
 
 The War Zone、The Aviationist、Breaking Defense、Air & Space Forces Magazine 已擴大為一般軍事新聞來源，加入 Naval News、Defense One、UK Defence Journal。所有可取得的 RSS 條目均可進入軍事分類，不再限定 F-16；符合 F-16 關鍵字的英文條目也會同步出現在 F-16 專區。這些一般媒體納入既有連續三次失敗停用及每週同洲候補機制。
+
+## 中文重點頭條與品牌圖示
+
+全球總覽上方每9秒輪播最多五則繁體中文頭條，可手動切換或暫停；減少動態偏好預設暫停。僅從每批執行時間前一小時已發布的英文 RSS 中，依台灣關聯與重大事件關鍵字排名，每類（軍事、政治、經濟、科技、東南亞）最多一則；缺稿不以舊聞補位。標示 AI 編譯、原媒體、原文連結與台北更新時間。
+
+後台沿用15分鐘 Cron，每次檢查台北三小時批次（00、03、06、09、12、15、18、21時），以 D1 原子鎖確保同批只完成一次。首次開站可初始化空資料庫，之後訪客請求只讀取快取，不觸發編譯。上游失敗最多嘗試三次，保留上一批並標示延遲。無發布時間、超過一小時與未來時間的稿件不入選。
+
+需要 Workers AI 綁定 `AI`，使用 `@cf/meta/llama-3.1-8b-instruct-fast`，僅傳送標題與短摘錄。D1 的 `headline_batches` 表會自動建立。AI 用量依帳號方案及額度計算。未設定 AI 時顯示服務未設定，不會假裝已翻譯。`node scripts/check-headlines.mjs` 驗證時間窗口、去重、排程鎖及失敗狀態。
+
+Q版「小地球記者」是本專案原創 SVG，使用於品牌與 favicon；來源檔為 `assets/worldwire-logo.svg`，由 Worker `/logo.svg` 提供。
