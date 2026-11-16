@@ -10,14 +10,18 @@ new Function(script);
 assert.ok(html.includes("['智庫報告','▤','think']"));
 assert.ok(html.includes("['付費報導','▣','paid']"));
 const feeds = JSON.parse(script.match(/const feeds=(\[.*?\]);/s)[1]);
-assert.equal(feeds.length, 137);
+assert.equal(feeds.length, 140);
 assert.equal(feeds.filter(f => f.id < 86).length, 86);
 assert.ok(!feeds.some(f => /taipei\s*times/i.test(f.name)));
 assert.ok(feeds.some(f => f.name === 'PBS News Hour' && f.region === '北美洲' && f.lang === 'en'));
 assert.equal(feeds.filter(f => f.watch === 'taiwan').length, 19);
 assert.equal(feeds.filter(f => f.watch === 'taiwan' && f.search).length, 6);
 assert.ok(feeds.filter(f => f.search).every(f => f.fallback?.startsWith('https://www.bing.com/news/search?')));
-assert.equal(feeds.filter(f => f.watch === 'f16').length, 8);
+assert.equal(feeds.filter(f => f.watch === 'f16').length, 4);
+for (const name of ["The War Zone","The Aviationist","Breaking Defense","Air & Space Forces Magazine","Naval News","Defense One","UK Defence Journal"]) {
+  const f=feeds.find(f=>f.name===name);
+  assert.ok(f && !f.watch && f.category==='軍事' && f.lang==='en', name+' must collect general military news');
+}
 assert.equal(feeds.filter(f => f.lang === 'ja').length, 8);
 assert.equal(feeds.filter(f => f.lang === 'ko').length, 7);
 assert.equal(feeds.filter(f => f.category === '智庫').length, 29);
