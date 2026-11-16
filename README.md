@@ -4,7 +4,7 @@
 
 ## 功能
 
-- 137 個追蹤入口：86 個媒體及智庫 RSS 來源，加上 51 個專題與研究追蹤入口。原有來源（含 8 個日語頻道、7 個韓文頻道與 29 個智庫與研究來源），涵蓋亞洲、中東、歐洲、北美洲、南美洲、非洲及大洋洲。
+- 140 個追蹤入口：86 個媒體及智庫 RSS 來源，加上 54 個專題、研究及擴充媒體入口。原有來源（含 8 個日語頻道、7 個韓文頻道與 29 個智庫與研究來源），涵蓋亞洲、中東、歐洲、北美洲、南美洲、非洲及大洋洲。
 - 新增日語來源：NHK（綜合／國際／經濟）、朝日新聞、每日新聞、共同通信社、時事通信、ITmedia NEWS。
 - 新增韓文來源：聯合新聞、韓民族日報、京鄉新聞、東亞日報、朝鮮日報、SBS 政治、ZDNet Korea。
 - 新增智庫：Global Taiwan Institute、Pacific Forum、ISEAS Fulcrum、MERICS、SWP、Atlantic Council、Stimson、ISDP、East-West Center、AEI、Hudson。RUSI 已更新為官方出版品 RSS。
@@ -53,9 +53,9 @@ Brookings 使用官方 WordPress 公開文章 API，保留標題、摘要及原�
 | 大洲 | 不同新聞媒體 |
 | --- | ---: |
 | 亞洲 | 20 |
-| 歐洲 | 7 |
+| 歐洲 | 10 |
 | 非洲 | 8 |
-| 北美洲 | 7 |
+| 北美洲 | 11 |
 | 南美洲 | 8 |
 | 大洋洲 | 11 |
 
@@ -121,3 +121,7 @@ Wrangler 會顯示部署網址。第一次 npx 或 npm 安裝需要網路；Clou
 ## 內容權利
 
 本專案不包含新聞全文資料庫。文章、標題、摘錄及媒體名稱的權利屬於各原始權利人。公開部署與商業使用前，應依各來源的 RSS 使用條款取得必要授權。程式碼目前未指定開源授權。
+
+## 軍事新聞來源
+
+The War Zone、The Aviationist、Breaking Defense、Air & Space Forces Magazine 已擴大為一般軍事新聞來源，加入 Naval News、Defense One、UK Defence Journal。所有可取得的 RSS 條目均可進入軍事分類，不再限定 F-16；符合 F-16 關鍵字的英文條目也會同步出現在 F-16 專區。這些一般媒體納入既有連續三次失敗停用及每週同洲候補機制。
