@@ -133,7 +133,7 @@ const trackingFeeds=[
     "name": "The Aviationist",
     "url": "https://theaviationist.com/feed/",
     "lang": "en",
-    "watch": "f16",
+    "watch": "",
     "search": false,
     "country": "義大利",
     "region": "歐洲",
@@ -145,7 +145,7 @@ const trackingFeeds=[
     "name": "Breaking Defense",
     "url": "https://breakingdefense.com/feed/",
     "lang": "en",
-    "watch": "f16",
+    "watch": "",
     "search": false,
     "country": "美國",
     "region": "北美洲",
@@ -157,7 +157,7 @@ const trackingFeeds=[
     "name": "The War Zone",
     "url": "https://www.twz.com/feed",
     "lang": "en",
-    "watch": "f16",
+    "watch": "",
     "search": false,
     "country": "美國",
     "region": "北美洲",
@@ -169,7 +169,7 @@ const trackingFeeds=[
     "name": "Air & Space Forces Magazine",
     "url": "https://www.airandspaceforces.com/feed/",
     "lang": "en",
-    "watch": "f16",
+    "watch": "",
     "search": false,
     "country": "美國",
     "region": "北美洲",
@@ -673,6 +673,45 @@ const trackingFeeds=[
     "publisher": "Brookings 中國與亞太研究",
     "search": false,
     "fallback": ""
+  },
+  {
+    "name": "Naval News",
+    "country": "法國",
+    "region": "歐洲",
+    "url": "https://www.navalnews.com/feed/",
+    "category": "軍事",
+    "lang": "en",
+    "watch": "",
+    "search": false,
+    "paid": false,
+    "publisher": "Naval News",
+    "fallback": ""
+  },
+  {
+    "name": "Defense One",
+    "country": "美國",
+    "region": "北美洲",
+    "url": "https://www.defenseone.com/rss/all/",
+    "category": "軍事",
+    "lang": "en",
+    "watch": "",
+    "search": false,
+    "paid": false,
+    "publisher": "Defense One",
+    "fallback": ""
+  },
+  {
+    "name": "UK Defence Journal",
+    "country": "英國",
+    "region": "歐洲",
+    "url": "https://ukdefencejournal.org.uk/feed/",
+    "category": "軍事",
+    "lang": "en",
+    "watch": "",
+    "search": false,
+    "paid": false,
+    "publisher": "UK Defence Journal",
+    "fallback": ""
   }
 ];
 const feeds = [
@@ -1083,7 +1122,7 @@ async function readSource(feed) {
     for(const match of page.matchAll(/<a\b[^>]*href=["'](https?:\/\/(?:www\.)?jiemian\.com\/article\/(\d+)\.html)["'][^>]*>([\s\S]*?)<\/a>/gi)) {
       const title=listingText(match[3]);
       if(title.length<8)continue;
-      articles.push({title:title.slice(0,220),url:match[1],rank:Number(match[2]),description:'界面新聞公開首頁文章索引'});
+      articles.push({title:title.slice(0,220),url:match[1],rank:Number(match[2]),date:"",description:'界面新聞公開首頁文章索引'});
     }
     articles.sort((a,b)=>b.rank-a.rank);
   }
